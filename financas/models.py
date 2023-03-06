@@ -12,6 +12,12 @@ class Account(models.Model):
         related_name='children',
     )
     
+    def saldo (self):
+        saldo = 0
+        for entry in self.entries.all():
+            saldo = saldo + entry.amount
+        return saldo
+    
     def __str__(self):
         return self.name
 

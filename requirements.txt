@@ -1,8 +1,8 @@
 asgiref==3.6.0
-Django==4.1.7
-psycopg2-binary==2.9.5
-sqlparse==0.4.3
 Babel==2.12.1
+Django==4.1.7
 django-money==3.0.0
+psycopg2-binary==2.9.5
 py-moneyed==2.0
+sqlparse==0.4.3
 typing_extensions==4.5.0

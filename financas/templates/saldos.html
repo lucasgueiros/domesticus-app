@@ -1,0 +1,8 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<ul>
+    {% for account in accounts %}
+        <li>{{ account.name }} - {{ account.saldo }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
