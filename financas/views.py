@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from .models import Account
 from django.template.response import TemplateResponse
+from django.views.generic import ListView
 
 # Create your views here.
-def saldos_view(request):
+def account_tree_view(request):
     context = {
-        'accounts': Account.objects.all(),
+        'root_accounts': Account.objects.filter(parent = None),
     }
-    return TemplateResponse(request, "saldos.html", context)
+    return TemplateResponse(request, "account_tree_view.html", context)

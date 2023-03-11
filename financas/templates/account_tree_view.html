@@ -1,0 +1,31 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+    <ul>
+        {% for account in root_accounts %}
+            <a href="{% url 'admin:financas_account_change' account.id %}">
+                <li>{{ account.name }} - {{ account.saldo }}</li>
+            </a>
+            <ul>
+                {% for account_1 in account.children.all %}
+                    <a href="{% url 'admin:financas_account_change' account_1.id %}">
+                        <li>{{ account_1.name }} - {{ account_1.saldo }}</li>
+                    </a>
+                    <ul>
+                        {% for account_2 in account_1.children.all %}
+                            <a href="{% url 'admin:financas_account_change' account_2.id %}">    
+                                <li>{{ account_2.name }} - {{ account_2.saldo }}</li>
+                            </a>
+                            <ul>
+                                {% for account_3 in account_2.children.all %}
+                                    <a href="{% url 'admin:financas_account_change' account_3.id %}">
+                                        <li>{{ account_3.name }} - {{ account_3.saldo }}</li>
+                                    </a>
+                                {% endfor %}
+                            </ul>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </ul>
+{% endblock %}
