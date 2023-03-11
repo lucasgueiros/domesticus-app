@@ -12,6 +12,7 @@ class Account(models.Model):
         related_name='children',
     )
     
+    @property
     def saldo (self):
         saldo = 0
         for entry in self.entries.all():

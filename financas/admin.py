@@ -6,8 +6,23 @@ from .views import saldos_view
 
 # Register your models here.
 
+class AccountEntriesAdminInline (admin.TabularInline):
+    model = Entry
+    fields = ('transaction','description', 'amount')
+
 # Accounts
 class AccountAdmin(admin.ModelAdmin):
+    fields = (
+        'name',
+        'mother',
+        'saldo',
+    )
+    readonly_fields = (
+        'saldo',
+    )
+    inlines = ( 
+               AccountEntriesAdminInline,
+    )
     def get_urls(self):
         urls = super().get_urls()
         my_urls = [
@@ -15,6 +30,16 @@ class AccountAdmin(admin.ModelAdmin):
         ]
         return my_urls + urls
 
+class TransactionEntriesAdminInline (admin.TabularInline):
+    model = Entry
+    fields = ('account','description', 'amount')
+
+
+class TransactionAdmin (admin.ModelAdmin):
+    inlines = (
+        TransactionEntriesAdminInline,
+    )
+
 admin.site.register(Account, AccountAdmin)
 admin.site.register(Entry)
-admin.site.register(Transaction)
+admin.site.register(Transaction, TransactionAdmin)
