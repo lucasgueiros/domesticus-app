@@ -14,7 +14,7 @@ class AccountEntriesAdminInline (admin.TabularInline):
 class AccountAdmin(admin.ModelAdmin):
     fields = (
         'name',
-        'mother',
+        'parent',
         'saldo',
     )
     readonly_fields = (
