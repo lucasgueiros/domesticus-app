@@ -8,6 +8,7 @@ from .views import account_tree_view, AccountDetailView
 
 class AccountEntriesAdminInline (admin.TabularInline):
     model = Entry
+    template = 'account_entries_tabular.html'
     fields = ('transaction','description', 'amount')
 
 # Accounts
@@ -21,7 +22,7 @@ class AccountAdmin(admin.ModelAdmin):
         'saldo',
     )
     inlines = ( 
-               AccountEntriesAdminInline,
+        AccountEntriesAdminInline,
     )
     def get_urls(self):
         urls = super().get_urls()
@@ -37,6 +38,14 @@ class TransactionEntriesAdminInline (admin.TabularInline):
 
 
 class TransactionAdmin (admin.ModelAdmin):
+    fields = (
+        'description',
+        'data',
+        'saldo',
+    )
+    readonly_fields = (
+        'saldo',
+    )
     inlines = (
         TransactionEntriesAdminInline,
     )

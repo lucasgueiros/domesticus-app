@@ -28,7 +28,14 @@ class Account(models.Model):
 class Transaction(models.Model):
     date = models.DateTimeField()
     description = models.CharField(max_length=300)
-    
+
+    @property
+    def saldo (self):
+        saldo = 0
+        for entry in self.entries.all():
+            saldo = saldo + entry.amount
+        return saldo
+
     def __str__(self):
         return self.description[:25]
 
