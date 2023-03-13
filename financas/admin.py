@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Account, Entry, Transaction
 from django.urls import path
 from django.template.response import TemplateResponse
-from .views import account_tree_view
+from .views import account_tree_view, AccountDetailView
 
 # Register your models here.
 
@@ -27,6 +27,7 @@ class AccountAdmin(admin.ModelAdmin):
         urls = super().get_urls()
         my_urls = [
             path('list/', account_tree_view),
+            path('<int:pk>/detail/', AccountDetailView.as_view()),
         ]
         return my_urls + urls
 

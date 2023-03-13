@@ -19,14 +19,18 @@ class Account(models.Model):
         return saldo
     
     def __str__(self):
-        return self.name
+        if self.parent:
+            return self.parent.__str__() + ":" + self.name
+        else:
+            return self.name
+        
 
 class Transaction(models.Model):
     date = models.DateTimeField()
     description = models.CharField(max_length=300)
     
     def __str__(self):
-        return self.description
+        return self.description[:25]
 
 class Entry(models.Model):
     account = models.ForeignKey(

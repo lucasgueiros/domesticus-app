@@ -1,0 +1,63 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+    <h3>{{ object }}</h3>
+
+    <table>
+        <thead>
+            <th>
+                Data
+            </th>
+            <th>
+                Descrição da Transação
+            </th>
+            <th>
+                Descrição do Lançamento
+            </th>
+            <th>
+                Valor
+            </th>
+            <th>
+                Saldo
+            </th>
+            <th>
+                Outra conta
+            </th>
+        </thead>
+        <tbody>
+            {% for entry, saldo, other_entry, more_entries in entries %}
+                <tr>
+                    <td>
+                        {{ entry.transaction.date |date:"d/m/y" }}
+                    </td>
+                    <td>
+                        <a href="{% url 'admin:financas_transaction_change' entry.transaction.id %}">
+                            {{ entry.transaction.description }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'admin:financas_entry_change' entry.id %}">
+                            {{ entry.description }}
+                        </a>
+                    </td>
+                    <td>
+                        {{ entry.amount }}
+                    </td>
+                    <td>
+                        {{ saldo }}
+                    </td>
+                    <td>
+                        {% if more_entries %}
+                            <a href="{% url 'admin:financas_account_change' other_entry.account.id %}">
+                                {{ other_entry.account.name }}
+                            </a>
+                        {% else %}
+                            Várias
+                        {% endif %}
+                    </td>
+                </tr>
+                
+            {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}
